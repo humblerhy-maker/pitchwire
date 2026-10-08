@@ -1,0 +1,61 @@
+name: fix-p2p-dividers
+on:
+  push:
+    branches: ["src-c"]
+    paths: [".github/workflows/fix-p2p.yml"]
+permissions:
+  contents: write
+jobs:
+  fix:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: src-c
+          token: ${{ secrets.GITHUB_TOKEN }}
+      - name: rewrite dividers
+        run: |
+          python3 - << 'PY'
+          from pathlib import Path
+          import hashlib
+          p = Path("src/lib/multiplayer/p2p.ts")
+          text = p.read_text(encoding="utf-8")
+          lines = text.splitlines(keepends=True)
+          BOX = "─"
+          assert ord(BOX) == 0x2500 and len(BOX) == 1
+          NL = chr(10)
+          CR = chr(13)
+          specs = [
+              ("signaling loop", 57),
+              ("per-pair connection", 52),
+              ("diagnostics + recovery", 49),
+          ]
+          hits = 0
+          for i, line in enumerate(lines):
+              raw = line.rstrip(CR + NL)
+              for key, extra in specs:
+                  mark = "  // " + (BOX * 2) + " " + key + " "
+                  if raw.startswith(mark) and set(raw[len(mark):]) <= set(BOX):
+                      nl = NL if line.endswith(NL) else ""
+                      lines[i] = mark + (BOX * extra) + nl
+                      hits += 1
+                      break
+          if hits != 3:
+              raise SystemExit("expected 3 divider hits, got %s" % hits)
+          out = "".join(lines)
+          data = out.encode("utf-8")
+          header = ("blob %d" % len(data)).encode("ascii") + bytes([0])
+          sha = hashlib.sha1(header + data).hexdigest()
+          print("size", len(data), "sha", sha)
+          if sha != "3dff0109c67f9d2790bf22be439f3298871f5253":
+              raise SystemExit("sha mismatch")
+          p.write_bytes(data)
+          PY
+      - name: commit and push
+        run: |
+          git config user.name "humblerhy-maker"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git rm -f .github/workflows/fix-p2p.yml
+          git add src/lib/multiplayer/p2p.ts
+          git commit -m "Add Pitchwire source batch 11"
+          git push origin HEAD:src-c
