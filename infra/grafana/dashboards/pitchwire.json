@@ -1,0 +1,38 @@
+{
+  "title": "Pitchwire",
+  "uid": "pitchwire",
+  "schemaVersion": 39,
+  "timezone": "utc",
+  "panels": [
+    {
+      "type": "stat",
+      "title": "Published",
+      "gridPos": { "h": 4, "w": 6, "x": 0, "y": 0 },
+      "targets": [{ "expr": "pitchwire_events_published_total" }]
+    },
+    {
+      "type": "stat",
+      "title": "Duplicates",
+      "gridPos": { "h": 4, "w": 6, "x": 6, "y": 0 },
+      "targets": [{ "expr": "pitchwire_events_duplicate_total" }]
+    },
+    {
+      "type": "stat",
+      "title": "Conflicts",
+      "gridPos": { "h": 4, "w": 6, "x": 12, "y": 0 },
+      "targets": [{ "expr": "pitchwire_events_conflict_total" }]
+    },
+    {
+      "type": "stat",
+      "title": "Failures",
+      "gridPos": { "h": 4, "w": 6, "x": 18, "y": 0 },
+      "targets": [{ "expr": "pitchwire_events_failed_total" }]
+    },
+    {
+      "type": "timeseries",
+      "title": "Processing ms (measured)",
+      "gridPos": { "h": 8, "w": 24, "x": 0, "y": 4 },
+      "targets": [{ "expr": "pitchwire_event_processing_ms" }]
+    }
+  ]
+}

@@ -1,0 +1,10 @@
+node_modules/
+.vercel/
+.tanstack/
+screenshots/
+artifacts/
+.env
+.env.*
+!.env.example
+.project_id
+*.log
