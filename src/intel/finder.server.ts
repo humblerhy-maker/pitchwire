@@ -460,7 +460,7 @@ export async function runFinder(text: string): Promise<FinderResult> {
           ? "No event fell inside the requested local day. Later events were not turned into picks."
           : "No eligible priced market cleared the evidence screen. A short price was not treated as safe, and missing markets were not invented.";
   } else if (!anyModelConfigured()) {
-    blocker = "AI reasoning unavailable \u2014 configure an active reasoning provider. No selection was guessed.";
+    blocker = "AI reasoning unavailable — configure an active reasoning provider. No selection was guessed.";
   } else {
     aiCalled = true;
     const reasoned = await reasonOnPacket({
@@ -854,7 +854,7 @@ export async function runVerify(text: string): Promise<{
   } else {
     for (const row of rows) {
       if (row.status !== "NOT IN FEED") {
-        row.detail += " AI reasoning unavailable \u2014 configure an active reasoning provider. This is a feed check, not a verdict.";
+        row.detail += " AI reasoning unavailable — configure an active reasoning provider. This is a feed check, not a verdict.";
       }
     }
   }
