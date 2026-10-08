@@ -38,7 +38,7 @@ async function isConnectorReady(): Promise<boolean> {
 /**
  * While `waiting` is true (a connector call returned `pending`), probes the
  * server for the connector token and calls `refetch` once it is present. The
- * probe is a header check on the app's own server \u2014 it never reaches the gate.
+ * probe is a header check on the app's own server — it never reaches the gate.
  * A `connector-token-ready` bridge event from the Grok preview chrome triggers
  * `refetch` immediately. A top-level page (download/export, local dev, the
  * sandbox's own `npm run preview`) is not framed by any preview, so no token

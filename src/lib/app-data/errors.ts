@@ -30,7 +30,7 @@ const MESSAGE_RULES: readonly MessageRule[] = [
   {
     needles: ["scope_denied"],
     kind: "scope_denied",
-    message: "This view isn't available \u2014 the app requested a tool outside its grant.",
+    message: "This view isn't available — the app requested a tool outside its grant.",
   },
   {
     needles: ["access_denied"],
@@ -52,7 +52,7 @@ export function classifyCallToolError(
   const detail = result.errorMessage || undefined;
   const raw = (result.errorMessage ?? "").toLowerCase();
   if (isConnectorPending(result)) {
-    return { kind: "pending", message: "Connecting to your data\u2026", detail };
+    return { kind: "pending", message: "Connecting to your data…", detail };
   }
   if (raw.includes("missing_connector_token")) {
     return {
