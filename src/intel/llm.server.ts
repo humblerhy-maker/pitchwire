@@ -63,6 +63,7 @@ export async function reasonOnPacket(packet: unknown): Promise<{ notes: ModelNot
     "A missing injury report is a risk to mention in the reason, not a reason to return an empty list when other ids clear that bar. " +
     "If no id has a usable overRate, rank priced markets only when the packet has no overRate field, and still do not treat a short price as safety. " +
     "Return JSON only, no markdown: {\"issued\":[{\"id\":\"copy an id from the packet\",\"reason\":\"one sentence citing only packet fields, including the main risk\"}]}. " +
+    "Do not invent ids. " +
     packetInstruction(packet) +
     "\n" +
     body;
