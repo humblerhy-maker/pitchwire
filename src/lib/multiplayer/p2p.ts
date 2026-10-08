@@ -168,6 +168,7 @@ export class P2PRoom {
   }
 
   // ── signaling loop ───────────────────────────────────────────────────────────────
+// PW-MARKER-489
 
   private schedulePoll(delay: number): void {
     if (this.closed) return;
