@@ -167,8 +167,8 @@ export class P2PRoom {
     return [...this.peers.values()].map((s) => ({ ...s.info }));
   }
 
-  // ── signaling loop ───────────────────────────────────────────────────────────────
-// PW-MARKER-489
+  // ── signaling loop ──────────────────
+// PW-MARKER-20
 
   private schedulePoll(delay: number): void {
     if (this.closed) return;
@@ -242,7 +242,7 @@ export class P2PRoom {
     this.emitPeers();
   }
 
-  // ── per-pair connection ─────────────────────────────────────────────────────────
+  // ── per-pair connection ──────────────────
 
   private connectTo(peerId: string, name: string, initiator: boolean): PeerSlot | null {
     if (this.closed) return null;
@@ -475,7 +475,7 @@ export class P2PRoom {
     }
   }
 
-  // ── diagnostics + recovery ─────────────────────────────────────────────────────
+  // ── diagnostics + recovery ──────────────────
 
   private pingAll(): void {
     const wire = JSON.stringify({ t: "ping" });
