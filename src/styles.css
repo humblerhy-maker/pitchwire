@@ -1,0 +1,50 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Source Sans 3", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Barlow Condensed", "Arial Narrow", sans-serif;
+  --color-bg: #101410;
+  --color-surface: #1a221c;
+  --color-surface-2: #24302a;
+  --color-fg: #edf3ee;
+  --color-muted: #93a399;
+  --color-line: #314038;
+  --color-signal: #e2ff4d;
+  --color-signal-ink: #142000;
+  --radius-lg: 0.75rem;
+}
+
+@layer base {
+  button:not(:disabled),
+  [role="button"]:not(:disabled) {
+    cursor: pointer;
+  }
+
+  html,
+  body {
+    background: var(--color-bg);
+    color: var(--color-fg);
+    font-family: var(--font-sans);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .flash-in {
+    animation: none !important;
+  }
+}
+
+.flash-in {
+  animation: flash-in 180ms ease-out;
+}
+
+@keyframes flash-in {
+  from {
+    opacity: 0;
+    transform: translateY(-6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
